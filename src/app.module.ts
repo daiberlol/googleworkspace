@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { HelloResolver } from './hello/hello.resolver';
 import { join } from 'path';
 import { GraphQLError } from 'graphql';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { ConfigModule } from '@nestjs/config';
 import { GoogleAuthModule } from './google-auth/google-auth.module';
 import { GoogleCalendarModule } from './google-calendar/google-calendar.module';
+import { GoogleTasksModule } from './google-tasks/google-tasks.module';
 
 @Module({
   imports: [
@@ -44,11 +44,11 @@ import { GoogleCalendarModule } from './google-calendar/google-calendar.module';
           locations:
             process.env.STATE === 'prod' ? undefined : formattedError.locations,
         };
-      },
-    }),
+      },    }),
     GoogleAuthModule,
     GoogleCalendarModule,
+    GoogleTasksModule,
   ],
-  providers: [HelloResolver],
+  providers: [],
 })
 export class AppModule {}

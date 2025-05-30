@@ -5,6 +5,7 @@ export enum GoogleCalendarEventType {
   FOCUS_TIME = 'focusTime',
   OUT_OF_OFFICE = 'outOfOffice',
   WORKING_LOCATION = 'workingLocation',
+  BIRTHDAY = 'birthday',
   // Add other event types as needed from Google Calendar API
 }
 

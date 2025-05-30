@@ -20,10 +20,99 @@ enum GoogleCalendarEventType {
   FOCUS_TIME
   OUT_OF_OFFICE
   WORKING_LOCATION
+  BIRTHDAY
+}
+
+"""Represents a Google Task"""
+type GoogleTask {
+  id: ID
+  title: String
+  notes: String
+  status: GoogleTaskStatus
+  due: String
+  completed: String
+  updated: String
+  parent: String
+  position: String
+  selfLink: String
+  etag: String
+  kind: String
+  deleted: Boolean
+}
+
+"""Possible status values for Google Tasks"""
+enum GoogleTaskStatus {
+  NEEDS_ACTION
+  COMPLETED
+}
+
+"""Represents a Google Task List"""
+type GoogleTaskList {
+  id: ID
+  title: String
+  updated: String
+  selfLink: String
+  etag: String
+  kind: String
+}
+
+"""Represents a Google Task List with its tasks"""
+type GoogleTaskListWithTasks {
+  taskList: GoogleTaskList!
+  tasks: [GoogleTask!]!
 }
 
 type Query {
-  sayHello: String!
-  googleCalendarEvents(calendarId: String! = "primary", maxResults: Float! = 10): [CalendarEvent!]!
-  googleCalendarEntries(calendarId: String! = "primary", maxResults: Float! = 10, eventTypes: [GoogleCalendarEventType!], timeMin: String = "2025-05-25T01:21:35.546Z"): [CalendarEvent!]!
+  googleCalendarListEvents(calendarId: String! = "primary", maxResults: Float! = 10): [CalendarEvent!]!
+  googleCalendarListEntries(calendarId: String! = "primary", maxResults: Float! = 10, eventTypes: [GoogleCalendarEventType!], timeMin: String = "2025-05-30T20:57:29.060Z"): [CalendarEvent!]!
+
+  """Get all task lists for the authenticated user"""
+  googleTasksListTaskLists: [GoogleTaskList!]!
+
+  """Get tasks from a specific task list"""
+  googleTasksListTasks(taskListId: String!, maxResults: Float! = 100, showCompleted: Boolean! = true, showDeleted: Boolean! = false, showHidden: Boolean! = false, dueMin: String, dueMax: String, completedMin: String, completedMax: String): [GoogleTask!]!
+
+  """Get all tasks from all task lists"""
+  googleTasksListAllTasks(maxResults: Float! = 100, showCompleted: Boolean! = true, showDeleted: Boolean! = false, showHidden: Boolean! = false, dueMin: String, dueMax: String, completedMin: String, completedMax: String): [GoogleTaskListWithTasks!]!
+
+  """Get a specific task by ID"""
+  googleTasksGetTask(taskListId: String!, taskId: String!): GoogleTask
+}
+
+type Mutation {
+  """Create a new task"""
+  googleTasksCreateTask(input: CreateTaskInput!): GoogleTask!
+
+  """Update an existing task"""
+  googleTasksUpdateTask(input: UpdateTaskInput!): GoogleTask!
+
+  """Delete a task"""
+  googleTasksDeleteTask(taskListId: String!, taskId: String!): Boolean!
+
+  """Mark a task as completed"""
+  googleTasksCompleteTask(taskListId: String!, taskId: String!): GoogleTask!
+
+  """Mark a task as incomplete"""
+  googleTasksUncompleteTask(taskListId: String!, taskId: String!): GoogleTask!
+}
+
+"""Input for creating a new Google Task"""
+input CreateTaskInput {
+  taskListId: String!
+  title: String!
+  notes: String
+  due: String
+  parent: String
+  previous: String
+}
+
+"""Input for updating a Google Task"""
+input UpdateTaskInput {
+  taskListId: String!
+  taskId: String!
+  title: String
+  notes: String
+  status: String
+  due: String
+  completed: String
 }

@@ -28,7 +28,7 @@ export class GoogleAuthService {
     // TEMPORARY: For testing, set a manually obtained access token
     this.oauth2Client.setCredentials({
       access_token:
-        'ya29.a0AW4XtxjGOD2aCmwDjR7CIBS7XO2ekmjB4Y_xhm4ab4O17v4CoixfZTQQwejkOPOMxRvmHwxU6Bkg9hwGC8Gagl0N8qb5FDFsM1y3sb9_HjPq1h2187-oil-OepV2MU86NtPcuvoVuc68S4N2zTwRttZxzBX5jzl6Zo07nXhWaCgYKAekSARYSFQHGX2Mi0COm78AbcAFDrcDw4EEgrg0175',
+        'ya29.a0AW4XtxjI7-UmOfbNompIXWLnKc0UAwfHag_EXkj4KCHEy5sPoN9-3HI_2TmkueKhmIKI3VatruDo9P5CzRN3Wsh3j4X4PtwSH21y2XQgNNCtnbIzNUGdApnVl810DlOsaTpG7h09lZrJ4_vkrkxJyvDm-eaAh_DPMvDTcPgraCgYKAYcSARYSFQHGX2MiWaa3owsqXM4DTMWGlzAPfg0175',
       // refresh_token: 'YOUR_REFRESH_TOKEN', // if you have one
       // scope: 'https://www.googleapis.com/auth/calendar.readonly',
       // token_type: 'Bearer',
@@ -69,6 +69,13 @@ export class GoogleAuthService {
 
   getGmailClient() {
     return google.gmail({
+      version: 'v1',
+      auth: this.getOAuth2Client() /* or service account auth */,
+    });
+  }
+
+  getTasksClient() {
+    return google.tasks({
       version: 'v1',
       auth: this.getOAuth2Client() /* or service account auth */,
     });

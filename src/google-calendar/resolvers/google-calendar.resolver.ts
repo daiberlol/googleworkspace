@@ -1,13 +1,12 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
-import { GoogleCalendarService } from './google-calendar.service';
-import { CalendarEvent } from './dto/event.model';
-import { GoogleCalendarEventType } from './dto/event-type.enum'; // Import the enum
+import { CalendarEvent } from '../dto/event.model';
+import { GoogleCalendarEventType } from '../dto/event-type.enum'; // Import the enum
+import { GoogleCalendarService } from '../services/google-calendar.service';
 
 @Resolver(() => CalendarEvent) // Specify the type the resolver primarily handles
 export class GoogleCalendarResolver {
   constructor(private googleCalendarService: GoogleCalendarService) {}
-
-  @Query(() => [CalendarEvent], { name: 'googleCalendarEvents' }) // Return an array of CalendarEvent
+  @Query(() => [CalendarEvent], { name: 'googleCalendarListEvents' }) // Return an array of CalendarEvent
   async getCalendarEvents(
     @Args('calendarId', { type: () => String, defaultValue: 'primary' })
     calendarId: string,
@@ -49,8 +48,7 @@ export class GoogleCalendarResolver {
   //     htmlLink: newEvent.htmlLink,
   //   };
   // }
-
-  @Query(() => [CalendarEvent], { name: 'googleCalendarEntries' })
+  @Query(() => [CalendarEvent], { name: 'googleCalendarListEntries' })
   async getCalendarEntries(
     @Args('calendarId', { type: () => String, defaultValue: 'primary' })
     calendarId: string,

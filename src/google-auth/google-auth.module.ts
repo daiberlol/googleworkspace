@@ -1,6 +1,6 @@
 import { Module, Global } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { GoogleAuthService } from './google-auth.service';
+import { GoogleAuthService } from './services/google-auth.service';
 
 @Global() // Make GoogleAuthService available globally if needed
 @Module({
