@@ -1,0 +1,29 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Represents a Google Calendar event"""
+type CalendarEvent {
+  id: ID!
+  summary: String
+  description: String
+  startTime: String
+  endTime: String
+  location: String
+  htmlLink: String
+  eventType: GoogleCalendarEventType
+}
+
+"""Possible types for Google Calendar entries"""
+enum GoogleCalendarEventType {
+  DEFAULT
+  FOCUS_TIME
+  OUT_OF_OFFICE
+  WORKING_LOCATION
+}
+
+type Query {
+  sayHello: String!
+  googleCalendarEvents(calendarId: String! = "primary", maxResults: Float! = 10): [CalendarEvent!]!
+  googleCalendarEntries(calendarId: String! = "primary", maxResults: Float! = 10, eventTypes: [GoogleCalendarEventType!], timeMin: String = "2025-05-25T01:21:35.546Z"): [CalendarEvent!]!
+}
