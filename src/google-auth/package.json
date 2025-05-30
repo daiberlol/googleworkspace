@@ -1,0 +1,40 @@
+{
+  "name": "@google-modules/auth",
+  "version": "1.0.0",
+  "description": "Google Authentication service module for Google APIs integration",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "google",
+    "auth",
+    "oauth2",
+    "nestjs",
+    "graphql"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.0.0",
+    "googleapis": "^126.0.1",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "your-repository-url"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

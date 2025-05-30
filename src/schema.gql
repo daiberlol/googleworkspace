@@ -64,7 +64,7 @@ type GoogleTaskListWithTasks {
 
 type Query {
   googleCalendarListEvents(calendarId: String! = "primary", maxResults: Float! = 10): [CalendarEvent!]!
-  googleCalendarListEntries(calendarId: String! = "primary", maxResults: Float! = 10, eventTypes: [GoogleCalendarEventType!], timeMin: String = "2025-05-30T21:01:42.052Z"): [CalendarEvent!]!
+  googleCalendarListEntries(calendarId: String! = "primary", maxResults: Float! = 10, eventTypes: [GoogleCalendarEventType!], timeMin: String = "2025-05-30T21:07:36.871Z"): [CalendarEvent!]!
 
   """Get all task lists for the authenticated user"""
   googleTasksListTaskLists: [GoogleTaskList!]!
